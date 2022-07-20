@@ -18,15 +18,18 @@ const Register = ({ onRouteChange, loadUser }: any) => {
   };
 
   const onSubmitSignIn = async () => {
-    const registerResponse = await fetch("http://localhost:8000/register", {
-      method: "post",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        email: email,
-        password: password,
-        name: name,
-      }),
-    });
+    const registerResponse = await fetch(
+      "https://serene-lake-49194.herokuapp.com/register",
+      {
+        method: "post",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: email,
+          password: password,
+          name: name,
+        }),
+      }
+    );
 
     const user = await registerResponse.json();
 

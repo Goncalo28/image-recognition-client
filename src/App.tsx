@@ -53,24 +53,30 @@ function App() {
   const onSubmit = async () => {
     setImageUrl(input);
     try {
-      const resp: any = await fetch("http://localhost:8000/image-url", {
-        method: "post",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          input: input,
-        }),
-      });
+      const resp: any = await fetch(
+        "https://serene-lake-49194.herokuapp.com/image-url",
+        {
+          method: "post",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            input: input,
+          }),
+        }
+      );
 
       const respJson = await resp.json();
 
       if (respJson) {
-        const imageRes = await fetch("http://localhost:8000/image", {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            id: user.id,
-          }),
-        });
+        const imageRes = await fetch(
+          "https://serene-lake-49194.herokuapp.com/image",
+          {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              id: user.id,
+            }),
+          }
+        );
         const count = await imageRes.json();
         setUser({ ...user, entries: count });
       }

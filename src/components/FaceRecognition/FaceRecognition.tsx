@@ -1,5 +1,5 @@
 import { IFaceBox } from "../../App";
-import "./styles.css";
+import "./faceRecognition.css";
 
 interface IProps {
   src: string;

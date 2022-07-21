@@ -1,7 +1,7 @@
-import React from "react";
+import { ChangeEvent } from "react";
 
 interface IProps {
-  onInputChange: (e: any) => void;
+  onInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
   onSubmit: () => void;
 }
 

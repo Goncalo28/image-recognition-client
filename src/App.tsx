@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import "./App.css";
 import Navigation from "./components/Navigation/Navigation";
 import Logo from "./components/Logo/Logo";
@@ -9,13 +9,28 @@ import ReactParticles from "./components/ReactParticles/ReactParticles";
 import SignIn from "./components/SignIn/SignIn";
 import Register from "./components/Register/Register";
 
+export interface IFaceBox {
+  leftCol: number;
+  topRow: number;
+  rightCol: number;
+  bottomRow: number;
+}
+
+export interface IUser {
+  id: string;
+  name: string;
+  email: string;
+  entries: number;
+  joined: string;
+}
+
 function App() {
   const [input, setInput] = useState("");
   const [imageUrl, setImageUrl] = useState("");
-  const [box, setBox] = useState({});
+  const [box, setBox] = useState<IFaceBox | null>(null);
   const [route, setRoute] = useState("signin");
   const [isSignedIn, setIsSignedIn] = useState(false);
-  const [user, setUser] = useState({
+  const [user, setUser] = useState<IUser>({
     id: "",
     name: "",
     email: "",
@@ -23,14 +38,14 @@ function App() {
     joined: "",
   });
 
-  const loadUser = (data: any) => {
+  const loadUser = (data: IUser) => {
     setUser(data);
   };
 
   const calculateFaceLocation = (predictionData: any) => {
     const faceDetected =
       predictionData.outputs[0].data.regions[0].region_info.bounding_box;
-    const image: any = document.getElementById("input-image");
+    const image = document.getElementById("input-image") as HTMLImageElement;
     const width = Number(image?.width);
     const height = Number(image?.height);
 
@@ -42,18 +57,18 @@ function App() {
     };
   };
 
-  const displayFaceBox = (faceBox: any) => {
+  const displayFaceBox = (faceBox: IFaceBox) => {
     setBox(faceBox);
   };
 
-  const onInputChange = (e: any) => {
+  const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
   };
 
   const onSubmit = async () => {
     setImageUrl(input);
     try {
-      const resp: any = await fetch(
+      const resp = await fetch(
         "https://serene-lake-49194.herokuapp.com/image-url",
         {
           method: "post",
@@ -90,7 +105,7 @@ function App() {
   const onRouteChange = (route: string) => {
     if (route === "signout") {
       setImageUrl("");
-      setBox({});
+      setBox(null);
       setUser({
         id: "",
         name: "",

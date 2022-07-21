@@ -1,6 +1,9 @@
-import React from "react";
+interface IProps {
+  name: string;
+  entries: number;
+}
 
-const Rank = ({ name, entries }: any) => {
+const Rank = ({ name, entries }: IProps) => {
   return (
     <div>
       <div className="white f3">

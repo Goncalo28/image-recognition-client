@@ -1,9 +1,9 @@
-import React from "react";
-import "./faceRecognition.css";
+import { IFaceBox } from "../../App";
+import "./styles.css";
 
 interface IProps {
   src: string;
-  box: any;
+  box: IFaceBox | null;
 }
 
 const FaceRecognition = ({ src, box }: IProps) => {
@@ -17,15 +17,17 @@ const FaceRecognition = ({ src, box }: IProps) => {
           width={500}
           height="auto"
         />
-        <div
-          className="bounding-box"
-          style={{
-            top: box.topRow,
-            bottom: box.bottomRow,
-            left: box.leftCol,
-            right: box.rightCol,
-          }}
-        />
+        {box && (
+          <div
+            className="bounding-box"
+            style={{
+              top: box.topRow,
+              bottom: box.bottomRow,
+              left: box.leftCol,
+              right: box.rightCol,
+            }}
+          />
+        )}
       </div>
     </div>
   );

@@ -1,15 +1,21 @@
-import React, { useState } from "react";
+import { ChangeEvent, useState } from "react";
+import { IUser } from "../../App";
 
-const SignIn = ({ onRouteChange, loadUser }: any) => {
+interface IProps {
+  onRouteChange: (p: string) => void;
+  loadUser: (p: IUser) => void;
+}
+
+const SignIn = ({ onRouteChange, loadUser }: IProps) => {
   const [signInEmail, setSignInEmail] = useState("");
   const [signInPassword, setSignInPassword] = useState("");
 
-  const onEmailChange = (event: any) => {
-    setSignInEmail(event.target.value);
+  const onEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setSignInEmail(e.target.value);
   };
 
-  const onPasswordChange = (event: any) => {
-    setSignInPassword(event.target.value);
+  const onPasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setSignInPassword(e.target.value);
   };
 
   const onSubmitSignIn = async () => {

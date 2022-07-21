@@ -1,6 +1,9 @@
-import React from "react";
+interface IProps {
+  onRouteChange: (p: string) => void;
+  isSignedIn: boolean;
+}
 
-const Navigation = ({ onRouteChange, isSignedIn }: any) => {
+const Navigation = ({ onRouteChange, isSignedIn }: IProps) => {
   if (isSignedIn) {
     return (
       <nav style={{ display: "flex", justifyContent: "flex-end" }}>

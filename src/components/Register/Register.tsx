@@ -1,20 +1,25 @@
-import React, { useState } from "react";
+import { ChangeEvent, useState } from "react";
+import { IUser } from "../../App";
+interface IProps {
+  onRouteChange: (p: string) => void;
+  loadUser: (p: IUser) => void;
+}
 
-const Register = ({ onRouteChange, loadUser }: any) => {
+const Register = ({ onRouteChange, loadUser }: IProps) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
 
-  const onNameChange = (event: any) => {
-    setName(event.target.value);
+  const onNameChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setName(e.target.value);
   };
 
-  const onEmailChange = (event: any) => {
-    setEmail(event.target.value);
+  const onEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
   };
 
-  const onPasswordChange = (event: any) => {
-    setPassword(event.target.value);
+  const onPasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
   };
 
   const onSubmitSignIn = async () => {
